@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-gem install fluentd -N
+gem install fluentd -N && cp bin/start-fluentd $1/bin
