@@ -6,6 +6,11 @@ SCRIPT=$1/.profile.d/fluentd.sh
 gem install fluentd -N && cat <<EOF > $SCRIPT
 #! /bin/sh
 
+echo "starting fluentd"
+
+echo "erb $HOME/fluentd/fluent.conf.erb > $HOME/fluentd/fluent.conf"
+echo "$HOME/vendor/bundle/bin/fluentd -c $HOME/fluentd/fluent.conf"
+
 erb $HOME/fluentd/fluent.conf.erb > $HOME/fluentd/fluent.conf
 $HOME/vendor/bundle/bin/fluentd -c $HOME/fluentd/fluent.conf
 EOF
