@@ -11,4 +11,6 @@ EOF
 
 if [ -e $SCRIPT ]; then
     chmod a+x $SCRIPT
+else
+    echo 'fluentd not installed'
 fi
