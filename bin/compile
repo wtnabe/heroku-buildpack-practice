@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-gem install fluentd -N
+SCRIPT=.profile.d/fluentd.sh
+
+gem install fluentd -N && cat <<EOF > $SCRIPT && chmod a+x $SCRIPT
+#! /bin/sh
+
+fluentd help
+EOF
