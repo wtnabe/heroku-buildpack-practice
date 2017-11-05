@@ -5,16 +5,21 @@ echo "starting fluentd"
 FLUENTD=$HOME/vendor/bundle/bin/fluentd
 CONFIG=$HOME/fluentd/fluent.conf
 
-if [ -e $FLUENTD -a -e $CONFIG ]; then
-    echo "erb $CONFIG.erb > $CONFIG"
-    echo "$FLUENTD -c $CONFIG"
-
+if [ -e $CONFIG.erb ]; then
     erb $HOME/fluentd/fluent.conf.erb > $HOME/fluentd/fluent.conf
-    $HOME/vendor/bundle/bin/fluentd -c $HOME/fluentd/fluent.conf
 
-    NEXT_COMMAND=${@:$n}
-    echo "next $NEXT_COMMAND"
-    $NEXT_COMMAND
+    if [ -e $FLUENTD ]; then
+        echo "erb $CONFIG.erb > $CONFIG"
+        echo "$FLUENTD -c $CONFIG"
+
+        $HOME/vendor/bundle/bin/fluentd -c $HOME/fluentd/fluent.conf
+
+        NEXT_COMMAND=${@:$n}
+        echo "next $NEXT_COMMAND"
+        $NEXT_COMMAND
+    else
+        echo 'fluentd not installed'
+    fi
 else
-    echo 'fluentd not installed'
+    echo "$CONFIG.erb not exist"
 fi
