@@ -5,7 +5,7 @@ echo "starting fluentd"
 FLUENTD=$HOME/vendor/bundle/bin/fluentd
 CONFIG=$HOME/fluentd/fluent.conf
 
-if [ -e $FLUENTD && -e $CONFIG ]; then
+if [ -e $FLUENTD -a -e $CONFIG ]; then
     echo "erb $CONFIG.erb > $CONFIG"
     echo "$FLUENTD -c $CONFIG"
 
